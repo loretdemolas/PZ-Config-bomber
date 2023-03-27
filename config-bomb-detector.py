@@ -49,12 +49,10 @@ class FileHandler(FileSystemEventHandler):
                     else:
                         continue
                     
-                    print(f"Updating {key} to {value}")
-
                     # update the corresponding key in the ConfigParser object
                     for i, l in enumerate(lines):
                         if l.startswith(key + '='):
-                            status(f"Updating {key} from {l.split('=')[1].strip()} to {value}")
+                            status(f"Updating {key} from {l.split('=')[1].strip()} --> {value}")
                             lines[i] = key + '=' + value + '\n'
                             break
                       
@@ -64,8 +62,8 @@ class FileHandler(FileSystemEventHandler):
             status("Configuration updated successfully")
         
         # Delete the created file
-        # os.remove(event.src_path)
-        # status('removing bomb')
+        os.remove(event.src_path)
+        status('removing bomb')
 
 if __name__ == '__main__':
     # Start monitoring the folder
